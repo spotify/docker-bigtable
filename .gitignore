@@ -1,0 +1,6 @@
+error.log
+*~
+dockerout
+target/
+*.iml
+build/

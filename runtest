@@ -1,0 +1,20 @@
+#!/bin/bash -ex
+#----------------
+echo -n "Checking that bigtable is up and running ... "
+
+RUN_NAME=$(head /dev/urandom | LC_ALL=C tr -dc A-Za-z0-9 | head -c 8)
+
+$DOCKER run -d --name="${RUN_NAME}" $1;
+sleep 5
+$DOCKER exec -ti $RUN_NAME nc -w2 -z localhost 8080 
+EXIT_STATUS=$?
+$DOCKER kill $RUN_NAME
+
+if [[ $EXIT_STATUS -eq 0 ]]
+then
+  echo OK
+else
+  echo FAIL
+  false
+fi
+#----------------

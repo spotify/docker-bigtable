@@ -10,9 +10,6 @@ RUN apt-get install -y netcat
 # Get bigtable go package
 RUN go get google.golang.org/cloud/bigtable
 
-# Patch the in memory bigtable server to run on 8080 until https://code-review.googlesource.com/#/c/4410/ is merged
-RUN sed -i 's/127.0.0.1:0/0.0.0.0:8080/g' /go/src/google.golang.org/cloud/bigtable/bttest/inmem.go
-
 ADD bigtable-server.go /go/bin/bigtable-server.go
 RUN go build /go/bin/bigtable-server.go
 ENTRYPOINT ["/go/bigtable-server"]

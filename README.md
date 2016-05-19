@@ -33,19 +33,12 @@ BigtableSession session = new BigtableSession(builder.build());
 
 Since this uses an in memory implementation of Bigtable, the Bigtable API is not 100% implemented (for example
 certain row filter types are not supported). In order to get a full list of that you should look in the [source for the in memory implementation](https://github.com/GoogleCloudPlatform/gcloud-golang/blob/master/bigtable/bttest/inmem.go).
-It is highly recommended to check the logs of the docker container if something is not working properly as there will be warning logs whenever an unsupported operation is attempted.
+It is highly recommended to check the logs of the docker container if something is not working properly as there will be warning logs whenever an unsupported operation is attempted. An [issue](https://github.com/GoogleCloudPlatform/gcloud-golang/issues/261) has been opended to address this.
 
 ## Notes
 
 Currently this uses the Go implementation because there is not an official Bigtable emulator provided in the google
-cloud tools. In order to get working within the docker container a patch was needed within the
-[google cloud go lang bigtable library](https://github.com/GoogleCloudPlatform/gcloud-golang/tree/master/bigtable).
-The [inmem.go](https://github.com/GoogleCloudPlatform/gcloud-golang/blob/master/bigtable/bttest/inmem.go)
-implementation chooses to run on a random port, so the file is modified within the Dockerfile to allow it to run on port 8080.
-There is a pr for the fix [here](https://code-review.googlesource.com/#/c/4410/). The sed command used to modify it
-was inspired by [this repo](https://github.com/hsinhoyeh/bttest-docker/blob/master/Dockerfile#L17).
-
-Hopefully once the Bigtable emulator is included within the set of gcloud utlities, this will be changed to use
+cloud tools. Hopefully once the Bigtable emulator is included within the set of gcloud utlities, this will be changed to use
 that implementation.
 
 

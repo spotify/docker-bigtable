@@ -14,7 +14,7 @@ image:
 	mkdir -p build
 	cp Dockerfile.in build/Dockerfile
 	cp bigtable-server.go build/bigtable-server.go
-	$(DOCKER) build -t $(DOCKER_REPOSITORY):$(DOCKER_TAG) build
+	$(DOCKER) build --no-cache=true -t $(DOCKER_REPOSITORY):$(DOCKER_TAG) build
 
 test: image
 	bash -ex runtest $(DOCKER_REPOSITORY):$(DOCKER_TAG)

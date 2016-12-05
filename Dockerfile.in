@@ -1,6 +1,6 @@
 ## -*- docker-image-name: "spotify/bigtable-emulator" -*-
 
-FROM golang:1.6
+FROM golang:1.7
 MAINTAINER Robert Gruener "robertg@spotify.com"
 
 # Install netcat
@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get install -y netcat
 
 # Get bigtable go package
-RUN go get google.golang.org/cloud/bigtable
+RUN go get -u google.golang.org/cloud/bigtable
 
 ADD bigtable-server.go /go/bin/bigtable-server.go
 RUN go build /go/bin/bigtable-server.go

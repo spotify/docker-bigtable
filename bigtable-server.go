@@ -22,7 +22,7 @@ import (
         "os"
         "os/signal"
         "syscall"
-        "google.golang.org/cloud/bigtable/bttest"
+        "cloud.google.com/go/bigtable/bttest"
 )
 
 

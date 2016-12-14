@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get install -y netcat
 
 # Get bigtable go package
-RUN go get -u google.golang.org/cloud/bigtable
+RUN go get -u cloud.google.com/go/bigtable
 
 ADD bigtable-server.go /go/bin/bigtable-server.go
 RUN go build /go/bin/bigtable-server.go

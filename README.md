@@ -13,7 +13,7 @@ docker run -it -p 8080:8080 spotify/bigtable-emulator:latest
 To use with the [Cloud Bigtable Client](https://github.com/GoogleCloudPlatform/cloud-bigtable-client) you need to
 set the Data Host and Table Admin Host to where the docker container is running, the Port to 8080, and to use the
 Plain Text Negotiation since the in memory implementation does not support SSL encryption. It is also highly recommended to use null credentials, otherwise valid ones are required. An example of using it
-with [BigtableOptions.java](https://github.com/GoogleCloudPlatform/cloud-bigtable-client/blob/master/bigtable-client-core/src/main/java/com/google/cloud/bigtable/config/BigtableOptions.java):
+with [BigtableOptions.java](https://github.com/GoogleCloudPlatform/cloud-bigtable-client/blob/master/bigtable-client-core-parent/bigtable-client-core/src/main/java/com/google/cloud/bigtable/config/BigtableOptions.java):
 
 ```java
 BigtableOptions.Builder builder = new BigtableOptions.Builder();

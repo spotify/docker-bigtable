@@ -4,11 +4,13 @@ echo -n "Checking that bigtable is up and running ... "
 
 RUN_NAME=$(head /dev/urandom | LC_ALL=C tr -dc A-Za-z0-9 | head -c 8)
 
-$DOCKER run -d --name="${RUN_NAME}" $1;
+$DOCKER run -d --name="${RUN_NAME}" $1 -cf dev.records.data,dev.records.meta,dev.records_by_secondary.data;
 sleep 5
 $DOCKER exec -ti $RUN_NAME nc -w2 -z localhost 8080 
 EXIT_STATUS=$?
+$DOCKER logs --details $RUN_NAME
 $DOCKER kill $RUN_NAME
+$DOCKER rm $RUN_NAME
 
 if [[ $EXIT_STATUS -eq 0 ]]
 then

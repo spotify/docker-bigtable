@@ -8,6 +8,11 @@ To run locally use the command:
 docker run -it -p 8080:8080 spotify/bigtable-emulator:latest
 ```
 
+You can specify tables and column families to be created at startup by using the `-cf` switch. The format is a comma separated list of `<instance>.<table>.<column family>`. Ex:
+```
+docker run -it -p 8080:8080 spotify/bigtable-emulator:latest -cf dev.records.data,dev.records.meta
+```
+
 ## Using with the Google Cloud Bigtable client
 
 To use with the [Cloud Bigtable Client](https://github.com/GoogleCloudPlatform/cloud-bigtable-client) you need to

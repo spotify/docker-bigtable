@@ -1,16 +1,24 @@
 ## -*- docker-image-name: "spotify/bigtable-emulator" -*-
 
-FROM golang:1.7
+FROM golang:1.9-alpine3.6 as builder
 MAINTAINER Robert Gruener "robertg@spotify.com"
 
-# Install netcat
-RUN apt-get update
-RUN apt-get install -y netcat
+# Get necessary dependency to run 'go get'
+RUN apk update && apk upgrade && apk add git
 
 # Get bigtable go package
 RUN go get -u cloud.google.com/go/bigtable
 
 ADD bigtable-server.go /go/bin/bigtable-server.go
 RUN go build /go/bin/bigtable-server.go
-ENTRYPOINT ["/go/bigtable-server"]
+
+
+FROM alpine:3.6
+
+# Get netcat
+RUN apk update && apk upgrade && apk add --no-cache netcat-openbsd
+
+COPY --from=builder /go/bigtable-server /
+
+ENTRYPOINT ["/bigtable-server"]
 EXPOSE 8080

@@ -1,5 +1,7 @@
 # Bigtable Emulator In Docker
 
+[![Mentioned in Awesome Bigtable](https://awesome.re/mentioned-badge-flat.svg)](https://github.com/zrosenbauer/awesome-bigtable)
+
 This repository contains everything to run the in memory Go implementation of Bigtable within a docker container
 for testing applications which use Bigtable.
 
